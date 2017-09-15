@@ -88,28 +88,41 @@ public class ImageSelector extends LinearLayout {
     }
 
     private void takePhoto() {
-        // 创建图片文件，用于存储拍照结果，目录地址为该应用在SD卡中的关联目录
-        String fileName = System.currentTimeMillis() + ".jpg";
-        File image = new File(mContext.getExternalCacheDir(), fileName);
-        try {
-            if (image.exists()) {
-                image.delete();
-            }
-            image.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        imagePath = image.getAbsolutePath();
-        Uri imageUri;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            imageUri = FileProvider.getUriForFile(mContext,
-                    "com.yl.imageselector.fileprovider", image);
-        } else {
-            imageUri = Uri.fromFile(image);
-        }
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        ((Activity) mContext).startActivityForResult(intent, TAKE_PHOTO);
+        PermissionHelper.with(mContext).requestCode(OPEN_ALBUM)
+                .requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .setListener(new PermissionHelper.RequestListener() {
+                    @Override
+                    public void onGranted() {
+                        // 创建图片文件，用于存储拍照结果，目录地址为该应用在SD卡中的关联目录
+                        String fileName = System.currentTimeMillis() + ".jpg";
+                        File image = new File(mContext.getExternalCacheDir(), fileName);
+                        try {
+                            if (image.exists()) {
+                                image.delete();
+                            }
+                            image.createNewFile();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        imagePath = image.getAbsolutePath();
+                        Uri imageUri;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            imageUri = FileProvider.getUriForFile(mContext,
+                                    "com.yl.imageselector.fileprovider", image);
+                        } else {
+                            imageUri = Uri.fromFile(image);
+                        }
+                        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                        ((Activity) mContext).startActivityForResult(intent, TAKE_PHOTO);
+                    }
+
+                    @Override
+                    public void onDenied() {
+                        Toast.makeText(mContext, "权限拒绝", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .request();
     }
 
     private void refresh(List<String> imagesPath) {
