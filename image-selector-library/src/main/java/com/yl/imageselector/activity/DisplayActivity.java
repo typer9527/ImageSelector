@@ -1,6 +1,8 @@
 package com.yl.imageselector.activity;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -8,16 +10,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.Window;
 
-import com.bumptech.glide.Glide;
 import com.yl.imageselector.R;
+import com.yl.imageselector.view.ZoomImageView;
 
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * 查看图片
+ * 查看图片，支持缩放和移动
  * Created by Luke on 2017/9/1.
  */
 
@@ -63,16 +65,15 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     class ImagePager {
-        private Activity mActivity;
-        public ImageView imageView;
+        public ZoomImageView imageView;
 
-        public ImagePager(Activity mActivity) {
-            this.mActivity = mActivity;
-            imageView = new ImageView(mActivity);
+        public ImagePager(Activity activity) {
+            imageView = new ZoomImageView(activity);
         }
 
         public void setImage(String path) {
-            Glide.with(mActivity).load(path).into(imageView);
+            Bitmap bitmap = BitmapFactory.decodeFile(path);
+            imageView.setImageBitmap(bitmap);
         }
     }
 }

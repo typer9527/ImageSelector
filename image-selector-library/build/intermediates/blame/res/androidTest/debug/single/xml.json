@@ -1,9 +1,5 @@
 [
     {
-        "merged": "E:\\Document\\AndroidProjects\\TestImageSelector\\image-selector-library\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml\\file_paths.xml",
-        "source": "E:\\Document\\AndroidProjects\\TestImageSelector\\image-selector-library\\build\\intermediates\\bundles\\debug\\res\\xml\\file_paths.xml"
-    },
-    {
         "merged": "E:\\Document\\AndroidProjects\\ImageSelector\\image-selector-library\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml\\file_paths.xml",
         "source": "E:\\Document\\AndroidProjects\\ImageSelector\\image-selector-library\\build\\intermediates\\bundles\\debug\\res\\xml\\file_paths.xml"
     }

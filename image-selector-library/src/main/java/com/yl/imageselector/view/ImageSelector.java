@@ -108,7 +108,7 @@ public class ImageSelector extends LinearLayout {
                         Uri imageUri;
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             imageUri = FileProvider.getUriForFile(mContext,
-                                    "com.yl.imageselector.fileprovider", image);
+                                    "com.yl.selector.fileprovider", image);
                         } else {
                             imageUri = Uri.fromFile(image);
                         }
