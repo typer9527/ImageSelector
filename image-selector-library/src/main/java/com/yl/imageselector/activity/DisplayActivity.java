@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import com.yl.imageselector.R;
 import com.yl.imageselector.view.ZoomImageView;
