@@ -14,8 +14,12 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true" >
-        <activity android:name="com.yl.imageselector.activity.AlbumActivity" />
-        <activity android:name="com.yl.imageselector.activity.DisplayActivity" />
+        <activity
+            android:name="com.yl.imageselector.activity.AlbumActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.yl.imageselector.activity.DisplayActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
