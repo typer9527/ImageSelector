@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         imageSelector = (ImageSelector) findViewById(R.id.image_selector);
 
-        imageSelector.clearAll();
-        imageSelector.getImagesPath();
+        // imageSelector.clearAll();
+        // imageSelector.getImagesPath();
     }
 
     @Override
