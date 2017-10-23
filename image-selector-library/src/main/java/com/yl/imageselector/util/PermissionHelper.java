@@ -12,7 +12,6 @@ import android.support.v4.content.ContextCompat;
  */
 
 public class PermissionHelper {
-    private static final String TAG = "PermissionHelper";
     private Context mContext;
     private String mRequestPermission;
     private static int mRequestCode;
@@ -33,12 +32,12 @@ public class PermissionHelper {
     }
 
     public PermissionHelper requestCode(int requestCode) {
-        this.mRequestCode = requestCode;
+        mRequestCode = requestCode;
         return this;
     }
 
     public PermissionHelper setListener(RequestListener listener) {
-        this.mListener = listener;
+        mListener = listener;
         return this;
     }
 

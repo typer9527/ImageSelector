@@ -38,17 +38,15 @@ public class ImageSelector extends LinearLayout {
 
     private static final int TAKE_PHOTO = 1;
     private static final int OPEN_ALBUM = 2;
-    private final RecyclerView recyclerView;
     private Context mContext;
     private ImageAdapter mAdapter;
-    private List<String> mImagesPath;
     private String imagePath;
 
     public ImageSelector(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.image_selector, this);
         mContext = context;
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(mContext, 3);
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new ImageAdapter();
@@ -67,6 +65,20 @@ public class ImageSelector extends LinearLayout {
                 takePhoto();
             }
         });
+    }
+
+    // 获取当前recyclerView中所有图片的存储路径
+    public List<String> getImagesPath() {
+        return mAdapter.getChosenImages();
+    }
+
+    // 清空当前所选图片
+    public void clearAll() {
+        mAdapter.clearImages();
+    }
+
+    private void refresh(List<String> imagesPath) {
+        mAdapter.refresh(imagesPath);
     }
 
     private void openAlbum() {
@@ -125,22 +137,9 @@ public class ImageSelector extends LinearLayout {
                 .request();
     }
 
-    private void refresh(List<String> imagesPath) {
-        mAdapter.refresh(imagesPath);
-    }
-
-    // 获取当前recyclerView中所有图片的存储路径
-    public List<String> getImagesPath() {
-        return mAdapter.getChosenImages();
-    }
-
-    // 清空当前所选图片
-    public void clearAll() {
-        mAdapter.clearImages();
-    }
-
     // onActivityResult()
     public void selectImageResult(int requestCode, int resultCode, Intent data) {
+        List<String> mImagesPath;
         switch (requestCode) {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
@@ -158,7 +157,6 @@ public class ImageSelector extends LinearLayout {
                 break;
             case OPEN_ALBUM:
                 if (resultCode == RESULT_OK) {
-                    mImagesPath = new ArrayList<>();
                     String[] imageArr = data.getStringArrayExtra("PATH");
                     mImagesPath = Arrays.asList(imageArr);
                     refresh(mImagesPath);

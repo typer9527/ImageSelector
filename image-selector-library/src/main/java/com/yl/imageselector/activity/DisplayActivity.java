@@ -38,7 +38,7 @@ public class DisplayActivity extends AppCompatActivity {
         viewPager.setCurrentItem(currentItemPosition);
     }
 
-    class DisplayAdapter extends PagerAdapter {
+    private class DisplayAdapter extends PagerAdapter {
         @Override
         public int getCount() {
             return chosenImages.size();
@@ -63,10 +63,10 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
-    class ImagePager {
-        public ZoomImageView imageView;
+    private class ImagePager {
+        ZoomImageView imageView;
 
-        public ImagePager(Activity activity) {
+        ImagePager(Activity activity) {
             imageView = new ZoomImageView(activity);
         }
 

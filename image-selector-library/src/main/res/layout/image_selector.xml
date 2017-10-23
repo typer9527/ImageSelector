@@ -8,30 +8,33 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="已选择的图片: "
+        android:text="@string/chosen_images"
         android:textSize="20sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1" />
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
-            android:text="相册"
-            android:layout_weight="1"
             android:id="@+id/open_album"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-        <Button
-            android:text="拍照"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="@string/album_text" />
+
+        <Button
             android:id="@+id/take_photo"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/take_photo_text" />
     </LinearLayout>
 </LinearLayout>

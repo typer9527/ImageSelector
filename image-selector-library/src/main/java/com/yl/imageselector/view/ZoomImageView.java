@@ -183,8 +183,8 @@ public class ZoomImageView extends View {
         matrix.postScale(totalRatio, totalRatio);
         float scaleWidth = sourceBitmap.getWidth() * totalRatio;
         float scaleHeight = sourceBitmap.getHeight() * totalRatio;
-        float translateX = 0f;
-        float translateY = 0f;
+        float translateX;
+        float translateY;
         if (currentWidth < width) {
             translateX = (width - scaleWidth) / 2;
         } else {

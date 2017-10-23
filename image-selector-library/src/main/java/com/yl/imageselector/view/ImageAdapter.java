@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -21,22 +21,21 @@ import java.util.List;
  * Created by Luke on 2017/8/23.
  */
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
+class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
 
-    private static final String TAG = "ImageAdapter";
     private List<String> chosenImages = new ArrayList<>();
     private Context mContext;
 
-    public void refresh(List<String> addImages) {
+    void refresh(List<String> addImages) {
         chosenImages.addAll(addImages);
         notifyDataSetChanged();
     }
 
-    public List<String> getChosenImages() {
+    List<String> getChosenImages() {
         return chosenImages;
     }
 
-    public void clearImages() {
+    void clearImages() {
         chosenImages.clear();
         notifyDataSetChanged();
     }
@@ -90,12 +89,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView cardImage;
-        ImageButton deleteImage;
+        Button deleteImage;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             cardImage = (ImageView) itemView.findViewById(R.id.card_image);
-            deleteImage = (ImageButton) itemView.findViewById(R.id.delete_image);
+            deleteImage = (Button) itemView.findViewById(R.id.delete_image);
         }
     }
 }

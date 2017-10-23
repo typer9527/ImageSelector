@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ImageSelector</string>
+    <string name="chosen_images">已选择的图片: </string>
+    <string name="album_text">相册</string>
+    <string name="take_photo_text">相册</string>
+    <string name="finish_text">完成</string>
 </resources>

@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Luke on 2017/8/23.
  */
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
+class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
     private List<String> imagesPath;
     private Context mContext;
@@ -29,19 +29,19 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         ImageView imageView;
         ImageView mark;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.image_view);
             mark = (ImageView) itemView.findViewById(R.id.mark);
         }
     }
 
-    public AlbumAdapter(List<String> imagesPath) {
+    AlbumAdapter(List<String> imagesPath) {
         this.imagesPath = imagesPath;
         chosenImages = new ArrayList<>();
     }
 
-    public List<String> getChosenImagesPath() {
+    List<String> getChosenImagesPath() {
         return chosenImages;
     }
 
