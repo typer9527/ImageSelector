@@ -11,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.yl.imageselector.R;
 import com.yl.imageselector.view.ZoomImageView;
 
@@ -70,9 +73,18 @@ public class DisplayActivity extends AppCompatActivity {
             imageView = new ZoomImageView(activity);
         }
 
-        public void setImage(String path) {
-            Bitmap bitmap = BitmapFactory.decodeFile(path);
-            imageView.setImageBitmap(bitmap);
+        void setImage(String path) {
+            imageView.setDefaultBitmap(BitmapFactory.decodeResource(getResources(),
+                    R.drawable.ic_default_displsy));
+            Glide.with(getApplicationContext()).load(path).asBitmap()
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(
+                                Bitmap resource,
+                                GlideAnimation<? super Bitmap> glideAnimation) {
+                            imageView.setImageBitmap(resource);
+                        }
+                    });
         }
     }
 }

@@ -24,6 +24,7 @@ public class ZoomImageView extends View {
 
     private Matrix matrix = new Matrix();
     private Bitmap sourceBitmap;
+    private Bitmap defaultBitmap;
     private int currentStatus;
     private int width, height;
     // 缩放时的中心点
@@ -55,7 +56,14 @@ public class ZoomImageView extends View {
     }
 
     public void setImageBitmap(Bitmap bitmap) {
+        defaultBitmap = null;
         sourceBitmap = bitmap;
+        invalidate();
+    }
+
+    // 设置默认显示图片
+    public void setDefaultBitmap(Bitmap bitmap) {
+        defaultBitmap = bitmap;
         invalidate();
     }
 
@@ -151,6 +159,10 @@ public class ZoomImageView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if (defaultBitmap != null) {
+            canvas.drawBitmap(defaultBitmap, matrix, null);
+            return;
+        }
         switch (currentStatus) {
             case STATUS_INIT:
                 initBitmap(canvas);
@@ -214,6 +226,7 @@ public class ZoomImageView extends View {
     }
 
     private void initBitmap(Canvas canvas) {
+
         if (sourceBitmap != null) {
             matrix.reset();
             int bitmapWidth = sourceBitmap.getWidth();
