@@ -2,11 +2,11 @@ package com.yl.imageselector.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -62,14 +62,14 @@ public class ZoomImageView extends View {
     }
 
     // 设置默认显示图片
-    public void setDefaultBitmap(Bitmap bitmap) {
-        defaultBitmap = bitmap;
+    public void setDefaultBitmap(int resId) {
+        defaultBitmap = BitmapFactory.decodeResource(getResources(), resId);
         invalidate();
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top,
-                            int right, int bottom) {
+    protected void onLayout(
+            boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         if (changed) {
             width = getWidth();
@@ -79,6 +79,9 @@ public class ZoomImageView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (defaultBitmap != null) {
+            return false;
+        }
         // 保证原始尺寸下，在ViewPager中可以左右滑动
         if (initRatio == totalRatio) {
             getParent().requestDisallowInterceptTouchEvent(false);
@@ -160,6 +163,9 @@ public class ZoomImageView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (defaultBitmap != null) {
+            float translateX = (width - defaultBitmap.getWidth()) / 2f;
+            float translateY = (height - defaultBitmap.getHeight()) / 2f;
+            matrix.postTranslate(translateX, translateY);
             canvas.drawBitmap(defaultBitmap, matrix, null);
             return;
         }
@@ -226,13 +232,10 @@ public class ZoomImageView extends View {
     }
 
     private void initBitmap(Canvas canvas) {
-
         if (sourceBitmap != null) {
             matrix.reset();
             int bitmapWidth = sourceBitmap.getWidth();
             int bitmapHeight = sourceBitmap.getHeight();
-            Log.e("ZoomImage", "initBitmap: " + bitmapWidth + ":" + bitmapWidth);
-            Log.e("ZoomImage", "initBitmap: " + width + ":" + height);
             if (bitmapWidth > width || bitmapHeight > height) {
                 if (bitmapWidth - width > bitmapHeight - height) {
                     float ratio = width / (bitmapWidth * 1.0f);

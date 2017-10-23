@@ -2,7 +2,6 @@ package com.yl.imageselector.activity;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -74,8 +73,7 @@ public class DisplayActivity extends AppCompatActivity {
         }
 
         void setImage(String path) {
-            imageView.setDefaultBitmap(BitmapFactory.decodeResource(getResources(),
-                    R.drawable.ic_default_displsy));
+            imageView.setDefaultBitmap(R.drawable.ic_default_displsy);
             Glide.with(getApplicationContext()).load(path).asBitmap()
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
