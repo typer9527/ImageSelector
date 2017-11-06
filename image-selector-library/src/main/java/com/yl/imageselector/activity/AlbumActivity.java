@@ -67,11 +67,13 @@ public class AlbumActivity extends AppCompatActivity {
         Cursor cursor = getContentResolver().query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 null, null, null, null);
-        while (cursor.moveToNext()) {
-            String path = cursor.getString(cursor.getColumnIndex(
-                    MediaStore.Images.Media.DATA));
-            mImagesPath.add(path);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String path = cursor.getString(cursor.getColumnIndex(
+                        MediaStore.Images.Media.DATA));
+                mImagesPath.add(path);
+            }
+            cursor.close();
         }
-        cursor.close();
     }
 }
